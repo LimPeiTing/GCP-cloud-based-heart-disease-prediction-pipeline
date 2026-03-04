@@ -326,13 +326,13 @@ requirements.txt
 ## Running the Pipeline
 
 Example workflow:
-# run preprocessing
+- run preprocessing
 python src/datapipeline/dataproc_preprocessing.py
 
-# train model
+- train model
 python src/modeling/train_model.py
 
-# generate predictions
+- generate predictions
 python src/modeling/evaluate_model.py
 
 ---
