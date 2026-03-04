@@ -54,6 +54,33 @@ I --> J[Streamlit Web Application]
 
 ---
 
+## Cloud Architecture
+
+The project uses a layered cloud architecture built on Google Cloud Platform to support scalable data processing, machine learning, and deployment.
+
+```mermaid
+flowchart TD
+
+A[Healthcare Dataset<br>Kaggle] --> B[Google Cloud Storage<br>Bronze Layer]
+
+B --> C[Dataproc Cluster<br>PySpark ETL]
+
+C --> D[BigQuery Silver Dataset<br>Processed Data]
+
+D --> E[BigQuery ML<br>Feature Selection]
+
+E --> F[Vertex AI Notebook<br>Model Training]
+
+F --> G[BigQuery Gold Dataset<br>Predictions]
+
+G --> H[Power BI Dashboard]
+
+F --> I[Cloud Run API<br>Prediction Service]
+
+I --> J[Streamlit Web Application]
+```
+---
+
 ## Data Architecture
 
 The pipeline uses a Bronze–Silver–Gold data lifecycle.
@@ -68,32 +95,29 @@ This layered structure ensures data quality and enables scalable analytics.
 
 ---
 
-## Data Pipeline Workflow
+
+## Data Engineering Pipeline
 
 The end-to-end data pipeline consists of several stages.
 
 ```mermaid
 flowchart LR
 
-A[Raw CSV Dataset] --> B[Upload to GCS]
+A[Raw CSV Dataset] --> B[GCS Bronze Layer]
 
-B --> C[PySpark ETL<br>Dataproc]
+B --> C[Dataproc PySpark Processing]
 
 C --> D[Feature Engineering]
 
-D --> E[Write Processed Data<br>to BigQuery]
+D --> E[BigQuery Silver Table]
 
-E --> F[Model Training]
+E --> F[Feature Selection<br>BigQuery ML]
 
-F --> G[Generate Predictions]
+F --> G[Model Training<br>Vertex AI]
 
-G --> H[Store Gold Dataset]
+G --> H[Prediction Dataset<br>BigQuery Gold]
 
-H --> I[Visualization<br>Power BI]
-
-H --> J[API Deployment<br>Cloud Run]
-
-J --> K[Streamlit Prediction App]
+H --> I[Analytics Dashboard<br>Power BI]
 ```
 ---
 
@@ -264,6 +288,23 @@ Example analytics include:
 - probability distribution of predicted risk
 
 These dashboards help translate ML outputs into actionable insights.
+
+---
+## Deployment Architecture
+
+```mermaid
+flowchart LR
+
+A[User Input] --> B[Streamlit Web App]
+
+B --> C[Cloud Run API]
+
+C --> D[Prediction Model]
+
+D --> E[Prediction Result]
+
+E --> B
+```
 
 ---
 
